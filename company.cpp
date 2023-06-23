@@ -17,7 +17,7 @@ void Company::displayEmployees() const {
     for (const Employee& employee : employees) {
         std::cout << employee.getName() << " <" << employee.getEmail()
                   << ">  Phone: " << employee.getPhone() << " Salary: $" << employee.getSalary()
-                  << std::endl << std::endl;
+                  << std::endl;
     }
 }
 
@@ -149,7 +149,6 @@ Company Company::loadData(const std::string& companyName) {
         file.close();
         return company;
     } else {
-        std::cout << "Error: Failed to load data." << std::endl;
         return Company(companyName);
     }
 }

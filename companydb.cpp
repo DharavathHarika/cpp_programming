@@ -12,41 +12,52 @@ int main()
 
     while (true)
     {
-        std::cout << "\nMAIN MENU:\n";
+        std::cout << "    MAIN MENU\n";
         std::cout << "1.) Employees\n";
         std::cout << "2.) Sales\n";
         std::cout << "3.) Quit\n";
 
         int choice;
-        std::cout << "Choice? ";
+        std::cout << "\nChoice? ";
         std::cin >> choice;
-        std::cin.ignore(); 
+        std::cin.ignore();
 
         if (choice == 1)
         {
-            company.displayEmployees();
-            char operation;
-            std::cout << "(A)dd Employee or (M)ain Menu? ";
-            std::cin >> operation;
-            std::cin.ignore(); 
-
-            if (operation == 'A' || operation == 'a')
+            while (true)
             {
-                std::string name, email, phone;
-                double salary;
+                company.displayEmployees();
+                char operation;
+                std::cout << "(A)dd Employee or (M)ain Menu? ";
+                std::cin >> operation;
+                std::cin.ignore();
 
-                std::cout << "Name: ";
-                std::getline(std::cin, name);
-                std::cout << "Email: ";
-                std::getline(std::cin, email);
-                std::cout << "Phone: ";
-                std::getline(std::cin, phone);
-                std::cout << "Salary: ";
-                std::cin >> salary;
-                std::cin.ignore(); 
+                if (operation == 'A' || operation == 'a')
+                {
+                    std::string name, email, phone;
+                    double salary;
 
-                Employee employee(name, email, phone, salary);
-                company.addEmployee(employee);
+                    std::cout << "Name: ";
+                    std::getline(std::cin, name);
+                    std::cout << "Email: ";
+                    std::getline(std::cin, email);
+                    std::cout << "Phone: ";
+                    std::getline(std::cin, phone);
+                    std::cout << "Salary: ";
+                    std::cin >> salary;
+                    std::cin.ignore();
+
+                    Employee employee(name, email, phone, salary);
+                    company.addEmployee(employee);
+                }
+                else if (operation == 'M' || operation == 'a')
+                {
+                    break;
+                }
+                else
+                {
+                    std::cout << "Invalid choice. Please enter a valid character\n";
+                }
             }
         }
         else if (choice == 2)
@@ -56,7 +67,7 @@ int main()
                 char operation;
                 std::cout << "(A)dd Customer, Enter a (S)ale, (V)iew Customer, or (M)ain Menu? ";
                 std::cin >> operation;
-                std::cin.ignore(); 
+                std::cin.ignore();
 
                 if (operation == 'A' || operation == 'a')
                 {
@@ -81,7 +92,7 @@ int main()
                         int customerChoice;
                         std::cout << "Choice? ";
                         std::cin >> customerChoice;
-                        std::cin.ignore(); 
+                        std::cin.ignore();
 
                         if (customerChoice >= 1 && customerChoice <= company.getCustomerCount())
                         {
@@ -95,10 +106,14 @@ int main()
                             std::cin >> quantity;
                             std::cout << "Cost: ";
                             std::cin >> cost;
-                            std::cin.ignore(); 
+                            std::cin.ignore();
 
                             Purchase purchase(item, quantity, cost);
                             company.addPurchaseToCustomer(customerChoice - 1, purchase);
+                        }
+                        else
+                        {
+                            std::cout << "Invalid choice. Please enter a valid number\n";
                         }
                     }
                 }
@@ -110,17 +125,25 @@ int main()
                         int customerChoice;
                         std::cout << "Choice? ";
                         std::cin >> customerChoice;
-                        std::cin.ignore(); 
+                        std::cin.ignore();
 
                         if (customerChoice >= 1 && customerChoice <= company.getCustomerCount())
                         {
                             company.displayCustomerDetails(customerChoice - 1);
                         }
+                        else
+                        {
+                            std::cout << "Invalid choice. Please enter a valid number\n";
+                        }
                     }
+                }
+                else if (operation == 'M' || operation == 'm')
+                {
+                    break;
                 }
                 else
                 {
-                    break;
+                    std::cout << "Invalid choice. Please enter a valid character\n";
                 }
             }
         }
